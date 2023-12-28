@@ -10,7 +10,10 @@ function getUserChoice(){
   let userInput;
   do {
     userInput = prompt("Please enter your choice");
-    userInput = userInput.charAt(0).toUpperCase() + userInput.slice(1);
+  
+    if (userInput != null) {
+      userInput = userInput.charAt(0).toUpperCase() + userInput.slice(1);
+    }
   } while (typeof(userInput) != "string" || (userInput != "Rock"
     && userInput != "Paper" && userInput != "Scissors"));
   
@@ -61,6 +64,7 @@ function playRound() {
 }
 
 function game() {
+  console.log("Welcome to Rock Paper Scissors")
   for (let i = 0; i < 5; i++){
     playRound();
   }
