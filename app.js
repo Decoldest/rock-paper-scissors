@@ -1,10 +1,11 @@
+
+//Chooses a random rock, paper, or scissors by the computer
 function getComputerChoice(){
   let choiceNumber = Math.floor(Math.random() * 3);
-  console.log(choiceNumber);
   return choiceNumber == 0 ? "Rock" : choiceNumber == 1 ? "Paper" : "Scissors"; 
 }
 
-
+//Asks user for input of rock, paper, scissors. Continues until valid option provided
 function getUserChoice(){
   let userInput;
   do {
@@ -16,6 +17,7 @@ function getUserChoice(){
     return userInput;
 }
 
+//Chooses a winner between two given hands, returns null if tied
 function chooseWinner(firstSelection, secondSelection){
   let winningHands = {
     "Rock" : "Scissors",
@@ -32,6 +34,7 @@ function chooseWinner(firstSelection, secondSelection){
   else return null;
 }
 
+//Simulates one round between user and computer, continues until ties are broken
 function playRound() {
   let winner;
   let playerSelection;
@@ -39,7 +42,7 @@ function playRound() {
   let ties = 0;
 
   while (!winner){
-    if (ties++ > 0) {
+    if (ties++ != 0) {
       console.log("Tie. Choose again");
     }
     playerSelection = getUserChoice();
@@ -57,4 +60,10 @@ function playRound() {
   return winner;
 }
 
-console.log(playRound());
+function game() {
+  for (let i = 0; i < 5; i++){
+    playRound();
+  }
+}
+
+game();
