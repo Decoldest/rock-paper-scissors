@@ -35,36 +35,49 @@ function chooseWinner(firstSelection, secondSelection){
 }
 
 //Simulates one round between user and computer, continues until ties are broken
-function playRound() {
+function playRound(playerSelection) {
   let winner;
-  let playerSelection;
   let computerSelection;
-  let ties = 0;
 
-  while (!winner){
-    if (ties++ != 0) {
-      console.log("Tie. Choose again");
-    }
-    playerSelection = getUserChoice();
-    computerSelection = getComputerChoice();
-    console.log("you chose " + playerSelection);
-    console.log("computer chose " + computerSelection);
-    winner = chooseWinner(playerSelection, computerSelection);
-  }
+  computerSelection = getComputerChoice();
+  userOutput.textContent = `You chose ${playerSelection}`;
+  computerOutput.textContent = `Computer chose ${computerSelection}`;
+  winner = chooseWinner(playerSelection, computerSelection);
+
   if (winner == playerSelection) {
-    console.log("You win! " + playerSelection + " beats " + computerSelection);
+    roundOutput.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+  }
+  else if (winner == computerSelection){
+    roundOutput.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
   }
   else {
-    console.log("You Lose! " + computerSelection + " beats " + playerSelection);
+    roundOutput.textContent = "Tie. Choose again";
   }
   return winner;
 }
 
-function game() {
-  console.log("Welcome to Rock Paper Scissors")
-  for (let i = 0; i < 5; i++){
-    playRound();
-  }
+const container = document.querySelector('div#container');
+const buttonContainer = document.createElement('div');
+const options = ['Rock', 'Paper', 'Scissors'];
+
+function createButton(choice, container) {
+  let choiceButton = document.createElement('button');
+  choiceButton.textContent = choice;
+  choiceButton.addEventListener('click', () => {
+    playRound(choice);
+  });
+  container.appendChild(choiceButton);
 }
 
-game();
+for(choice of options){
+  createButton(choice, buttonContainer);
+}
+
+const userOutput = document.createElement('h3');
+const computerOutput = document.createElement('h3');
+const roundOutput = document.createElement('h2');
+
+container.appendChild(buttonContainer);
+container.appendChild(userOutput);
+container.appendChild(computerOutput);
+container.appendChild(roundOutput);
