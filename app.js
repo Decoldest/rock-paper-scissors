@@ -1,30 +1,15 @@
 function getComputerChoice(){
   let choiceNumber = Math.floor(Math.random() * 3);
-  return choiceNumber === 0 ? "Rock" : choiceNumber === 1 ? "Paper" : "Scissors"; 
+  return choiceNumber === 0 ? "Fire" : choiceNumber === 1 ? "Water" : "Grass"; 
 }
 
-//Asks user for input of rock, paper, scissors. Continues until valid option provided
-function getUserChoice(){
-  let userInput;
-  do {
-    userInput = prompt("Please enter your choice");
-  
-    if (userInput !== null) {
-      userInput = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
-    }
-  } while (typeof(userInput) !== "string" || (userInput !== "Rock"
-    && userInput !== "Paper" && userInput !== "Scissors"));
-  
-  return userInput;
-}
+let winningHands = {
+  "Fire" : "Grass",
+  "Water" : "Fire",
+  "Grass" : "Water"
+};
 
 function chooseWinner(firstSelection, secondSelection){
-  let winningHands = {
-    "Rock" : "Scissors",
-    "Paper" : "Rock",
-    "Scissors" : "Paper"
-  };
-
   if (winningHands[firstSelection] === secondSelection) {
     return firstSelection;
   }
@@ -34,7 +19,6 @@ function chooseWinner(firstSelection, secondSelection){
   else return null;
 }
 
-//Simulates one round between user and computer, continues until ties are broken
 function playRound(playerSelection) {
   let winner;
   let computerSelection;
@@ -46,9 +30,11 @@ function playRound(playerSelection) {
 
   if (winner == playerSelection) {
     roundOutput.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+    updateScore("Player");
   }
   else if (winner == computerSelection){
     roundOutput.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
+    updateScore("Computer");
   }
   else {
     roundOutput.textContent = "Tie. Choose again";
@@ -56,28 +42,41 @@ function playRound(playerSelection) {
   return winner;
 }
 
-const container = document.querySelector('div#container');
-const buttonContainer = document.createElement('div');
-const options = ['Rock', 'Paper', 'Scissors'];
+let scores = {
+  "Player": 0,
+  "Computer" : 0
+};
 
-function createButton(choice, container) {
-  let choiceButton = document.createElement('button');
-  choiceButton.textContent = choice;
-  choiceButton.addEventListener('click', () => {
-    playRound(choice);
+const options = Array.from(document.querySelectorAll('button'));
+
+function updateScore(winner){
+  scores[winner]++;
+  scoreOutput.textContent = `${scores["Player"]} - ${scores["Computer"]}`;
+  if(scores[winner] === 5){
+    endGame(winner);
+  }
+}
+
+function endGame(gameWinner){
+  if (gameWinner === 'Player'){
+    scoreOutput.textContent = "Congratulations, You Win!";
+  }
+  else if (gameWinner === 'Computer'){
+    scoreOutput.textContent = "Sorry, You Lose!"
+  }
+}
+
+for(butn of options){
+  let ele = butn.id;
+  butn.addEventListener('click', () => {
+    playRound(ele);
   });
-  container.appendChild(choiceButton);
 }
 
-for(choice of options){
-  createButton(choice, buttonContainer);
-}
+const userOutput = document.querySelector('#userOutput');
+const computerOutput = document.querySelector('#computerOutput');
+const roundOutput = document.querySelector('#roundOutput');
+const scoreOutput = document.querySelector('#score');
 
-const userOutput = document.createElement('h3');
-const computerOutput = document.createElement('h3');
-const roundOutput = document.createElement('h2');
+updateScore();
 
-container.appendChild(buttonContainer);
-container.appendChild(userOutput);
-container.appendChild(computerOutput);
-container.appendChild(roundOutput);

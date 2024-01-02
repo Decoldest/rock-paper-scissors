@@ -3,10 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script> 
-  <title>Rock Paper Scissors</title>
+  <title>Elemental</title>
 </head>
 <body>
-  <div id="container">Rock Paper Scissors</div>
+  <div class="content">
+    <div id="container">Elemental Rock Paper Scissors
+      <div id="buttonContainer">
+        <button id="Grass">
+          <img src="https://img.pokemondb.net/sprites/lets-go-pikachu-eevee/normal/bulbasaur.png" height="100px" width="auto" alt="Bulbasaur">
+        </button>
+        <button id="Fire">
+          <img src="https://img.pokemondb.net/sprites/lets-go-pikachu-eevee/normal/charmander.png" height="100px" width="auto" alt="Bulbasaur">
+        </button>
+        <button id="Water">
+          <img src="https://img.pokemondb.net/sprites/lets-go-pikachu-eevee/normal/squirtle.png" height="100px" width="auto" alt="Bulbasaur">
+        </button>
+      </div>
+      <h3 id="userOutput">Choose Wisely.</h3>
+      <h3 id="computerOutput">Best To Five Wins.</h3>
+      <h2 id="roundOutput"></h2>
+
+    </div>
+    <div id="score"></div>
+  </div>
 </body>
 </html>
