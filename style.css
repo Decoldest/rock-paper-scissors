@@ -1,21 +1,28 @@
 #score{
-  font-size: 25px;
+  font-size: 40px;
 }
 
 #container{
-  height: 250px;
-  width: 400px;
+  height: 400px;
+  width: 700px;
   padding-bottom: 0px;
   margin-bottom: 0px;
+}
+
+#buttonContainer {
+  display: flex;
+  justify-content: center;
 }
 
 div{
   margin: auto;
   text-align: center;
-  border: 1px solid red;
 }
 
-
+button {
+  margin: 10px 20px;
+  background-color: rgb(232, 232, 232);
+}
 
 .content {
   display: flex;
@@ -23,5 +30,16 @@ div{
   justify-content: space-between;
   width: 75%;
   height: 100vh;
+  flex-wrap: wrap;
+
 }
 
+#balls .ball {
+  width: 40px;
+  margin: 0 15px;
+}
+
+.pokemon {
+  width: 150px;
+  height: auto;
+}

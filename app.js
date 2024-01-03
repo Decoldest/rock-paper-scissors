@@ -1,3 +1,5 @@
+let lives = 5;
+
 function getComputerChoice(){
   let choiceNumber = Math.floor(Math.random() * 3);
   return choiceNumber === 0 ? "Fire" : choiceNumber === 1 ? "Water" : "Grass"; 
@@ -58,25 +60,32 @@ function updateScore(winner){
 }
 
 function endGame(gameWinner){
+  scores["Player"] = 0;
+  scores["Computer"] = 0;
   if (gameWinner === 'Player'){
     scoreOutput.textContent = "Congratulations, You Win!";
   }
   else if (gameWinner === 'Computer'){
     scoreOutput.textContent = "Sorry, You Lose!"
   }
+  userOutput.textContent = "";
+  computerOutput.textContent = "";
+  roundOutput.textContent = "Play Again";
 }
 
-for(butn of options){
+for (butn of options){
   let ele = butn.id;
   butn.addEventListener('click', () => {
     playRound(ele);
   });
 }
 
+
 const userOutput = document.querySelector('#userOutput');
 const computerOutput = document.querySelector('#computerOutput');
 const roundOutput = document.querySelector('#roundOutput');
 const scoreOutput = document.querySelector('#score');
+
 
 updateScore();
 
